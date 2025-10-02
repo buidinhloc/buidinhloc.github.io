@@ -7,7 +7,7 @@ function tinhtuoi() {
   result.style.color = 'white';
   result.textContent = 'Đang suy nghĩ... 🤔';
 
-  if (isNaN(year) || year < 1900 || year > currentYear) {
+  if (isNaN(year) || year < 1910 || year > currentYear) {
     setTimeout(() => {
       result.style.color = 'red';
       result.textContent = 'Vui lòng nhập một năm sinh hợp lệ!';
@@ -18,7 +18,7 @@ function tinhtuoi() {
   const age = currentYear - year;
 
   setTimeout(() => {
-    result.style.color = 'lime';
+    result.style.color = 'white';
     result.textContent = `🎉 Bạn ${age} tuổi!`;
   }, 2000);
 }
