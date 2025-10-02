@@ -4,9 +4,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #000000, #0f172a);
   font-family: 'JetBrains Mono', monospace;
-  color: #fff;
+  color: #ffffff;
 }
 
 .container {
@@ -43,13 +43,13 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background: #ff7eb3;
+  background: #0f172a;
   color: white;
   transition: all 0.3s ease;
 }
 
 button:hover {
-  background: #ff5277;
+  background: #1f3057;
   transform: scale(1.05);
 }
 
