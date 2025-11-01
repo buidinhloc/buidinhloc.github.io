@@ -1,24 +1,53 @@
-function tinhtuoi() {
-  const input = document.getElementById('birthYear');
-  const result = document.getElementById('result');
-  const year = parseInt(input.value);
-  const currentYear = new Date().getFullYear();
+let wishes = [];
+const list = document.getElementById('list');
+const counter = document.getElementById('counter');
+const copiedSet = new Set(JSON.parse(localStorage.getItem('copiedWishes') || '[]'));
 
-  result.style.color = 'white';
-  result.textContent = 'Đang suy nghĩ... 🤔';
+fetch('wishes.txt')
+  .then(res => res.text())
+  .then(text => {
+    wishes = text.split('---').map(w => w.trim()).filter(w => w);
+    renderItems();
+  })
+  .catch(err => console.error('Không thể tải wishes.txt:', err));
 
-  if (isNaN(year) || year < 1910 || year > currentYear) {
-    setTimeout(() => {
-      result.style.color = 'red';
-      result.textContent = 'Vui lòng nhập một năm sinh hợp lệ!';
-    }, 2000);
-    return;
-  }
+function renderItems() {
+  list.innerHTML = "";
+  wishes.forEach((wish, idx) => {
+    const item = document.createElement('div');
+    item.className = 'item';
+    if (copiedSet.has(idx)) item.classList.add('copied');
 
-  const age = currentYear - year;
+    item.innerHTML = `<div class="text">${wish.replace(/\n/g, "<br>")}</div>`;
+
+    item.onclick = () => copyWish(idx, item);
+    list.appendChild(item);
+  });
+  updateCounter();
+}
+
+function copyWish(idx, item) {
+  navigator.clipboard.writeText(wishes[idx]);
+  copiedSet.add(idx);
+  localStorage.setItem('copiedWishes', JSON.stringify([...copiedSet]));
+  item.classList.add('copied');
 
   setTimeout(() => {
-    result.style.color = 'white';
-    result.textContent = `🎉 Bạn ${age} tuổi!`;
-  }, 2000);
+    list.removeChild(item);
+    list.appendChild(item);
+  }, 500);
+
+  updateCounter();
+}
+
+function resetCopied() {
+  if (confirm("Riel? Reset à?")) {
+    localStorage.removeItem('copiedWishes');
+    copiedSet.clear();
+    renderItems();
+  }
+}
+
+function updateCounter() {
+  counter.textContent = `${copiedSet.size}/${wishes.length}`;
 }
