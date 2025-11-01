@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dự đoán tuổi</title>
+  <title>Học sinh thanh tịnh</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>DỰ ĐOÁN TUỔI CỦA BẠN</h1>
-    <input id="birthYear" type="number" placeholder="nhập năm sinh">
-    <button onclick="tinhtuoi()">Dự đoán</button>
-    <p id="result"></p>
+
+  <h1>Tất cả những bình luận</h1>
+  
+  <div class="controls">
+    <div class="actions">
+      <button class="reset" onclick="resetCopied()">RESET</button>
+      <span id="counter">0/0</span>
+    </div>
   </div>
+
+  <div class="list" id="list"></div>
 
   <script src="script.js"></script>
 </body>
